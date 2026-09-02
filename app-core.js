@@ -55,6 +55,11 @@
     return /^https?:\/\/\S+$/i.test(value) ? value : '';
   }
 
+  function getIgdbUrlForRow(row) {
+    const value = getRowValueByVariants(row, ['igdb url', 'igdburl']);
+    return /^https?:\/\/\S+$/i.test(value) ? value : '';
+  }
+
   function parseTmdbPathReference(value) {
     const raw = String(value || '').trim();
     if (!raw) return null;

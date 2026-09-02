@@ -173,6 +173,7 @@
       card.dataset.tmdb = getTmdbPageUrlForRow(posterSourceRow || row);
       card.dataset.comicvine = getComicVineUrlForRow(posterSourceRow || row);
       card.dataset.library = getLibraryUrlForRow(posterSourceRow || row);
+      card.dataset.igdb = getIgdbUrlForRow(posterSourceRow || row);
       card.dataset.era = row['Era'] || '';
 
       const normalizedType = (row.type || '').toLowerCase();
@@ -297,13 +298,14 @@
       if (gregorianYearText) {
         infoHtml += `<div class="overlay-meta">${gregorianYearText}</div>`;
       }
-      if (card.dataset.letterboxd || card.dataset.imdb || card.dataset.tmdb || card.dataset.comicvine || card.dataset.library) {
+      if (card.dataset.letterboxd || card.dataset.imdb || card.dataset.tmdb || card.dataset.comicvine || card.dataset.library || card.dataset.igdb) {
         infoHtml += '<div class="overlay-links">';
         if (card.dataset.letterboxd) infoHtml += `<a href="${card.dataset.letterboxd}" target="_blank" title="Letterboxd"><img src="images/Letterboxd-logo.png" alt="Letterboxd"></a>`;
         if (card.dataset.imdb) infoHtml += `<a href="${card.dataset.imdb}" target="_blank" title="IMDb"><img src="images/IMDB-logo.png" alt="IMDb"></a>`;
         if (card.dataset.tmdb) infoHtml += `<a href="${card.dataset.tmdb}" target="_blank" title="TMDB" aria-label="TMDB"><img src="images/TMDB-logo.png" alt="TMDB" onerror="this.style.display='none';this.parentNode.textContent='TMDB';"></a>`;
         if (card.dataset.comicvine) infoHtml += `<a href="${card.dataset.comicvine}" target="_blank" rel="noopener noreferrer" title="Comic Vine" aria-label="Comic Vine"><img src="images/comicvine-logo.png" alt="Comic Vine"></a>`;
         if (card.dataset.library) infoHtml += `<a href="${card.dataset.library}" target="_blank" rel="noopener noreferrer" title="Open Library" aria-label="Open Library"><img src="images/OpenLibraryLogo.png" alt="Open Library"></a>`;
+        if (card.dataset.igdb) infoHtml += `<a href="${card.dataset.igdb}" target="_blank" rel="noopener noreferrer" title="IGDB" aria-label="IGDB"><img src="images/IGDB-logo.png" alt="IGDB"></a>`;
         infoHtml += '</div>';
       }
       infoOverlay.innerHTML = infoHtml;
