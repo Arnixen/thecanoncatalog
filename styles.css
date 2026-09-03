@@ -393,9 +393,12 @@
     border-radius: 8px;
     padding: 6px;
     cursor: pointer;
-    transition: background 0.2s, opacity 0.2s;
+    transition: background 0.2s, opacity 0.2s, color 0.2s;
     opacity: 1;
     background: transparent;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
   }
   .era-btn::before {
     content: '';
@@ -404,6 +407,7 @@
     border-radius: inherit;
     pointer-events: none;
     opacity: 0;
+    z-index: -1;
   }
   .era-btn img {
     max-width: 60px;
@@ -416,6 +420,7 @@
     border-color: transparent;
     opacity: 1;
     background: transparent;
+    color: #111;
   }
   .era-btn.selected::before {
     opacity: 1;
@@ -611,6 +616,13 @@
 
 :root.compact-mode {
   --card-gap: 0px;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --cards-per-view: 3;
+    --card-gap: 6px;
+  }
 }
 
 :root.compact-mode .card {
