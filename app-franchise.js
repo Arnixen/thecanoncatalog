@@ -184,10 +184,10 @@
       if (selectedEras.length > 0 && !selectedEras.includes(cardEra)) {
         hidden = true;
       }
-      if (checkedStateMode === 'checked' && !(isCardChecked || isCardPartiallyChecked)) {
+      if (checkedStateMode === 'checked' && !isCardChecked) {
         hidden = true;
       }
-      if (checkedStateMode === 'unchecked' && (isCardChecked || isCardPartiallyChecked)) {
+      if (checkedStateMode === 'unchecked' && isCardChecked) {
         hidden = true;
       }
 

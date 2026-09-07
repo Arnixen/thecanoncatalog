@@ -84,9 +84,9 @@
   };
 
   function formatFranchiseUpdatedText(timestamp) {
-    if (!timestamp) return 'Last updated: â€”';
+    if (!timestamp) return 'Last updated:';
     const parsedDate = timestamp instanceof Date ? timestamp : new Date(timestamp);
-    if (Number.isNaN(parsedDate.getTime())) return 'Last updated: â€”';
+    if (Number.isNaN(parsedDate.getTime())) return 'Last updated:';
     const formattedDate = new Intl.DateTimeFormat(undefined, {
       year: 'numeric',
       month: 'long',
@@ -101,23 +101,30 @@
 
     const workbookFile = franchiseFiles[franchiseKey];
     if (!workbookFile) {
-      label.textContent = 'Last updated: â€”';
+      label.textContent = 'Last updated:';
       label.style.display = 'none';
       return;
     }
 
-    label.textContent = 'Last updated: â€¦';
+    label.textContent = 'Last updated:';
     label.style.display = 'block';
 
-    const workbookUrl = new URL(workbookFile, window.location.href).toString();
-    fetch(workbookUrl, { method: 'HEAD' })
+    const commitsUrl = `https://api.github.com/repos/Arnixen/thecanoncatalog/commits?path=${encodeURIComponent(workbookFile)}&per_page=1`;
+    fetch(commitsUrl, {
+      headers: { Accept: 'application/vnd.github+json' }
+    })
       .then((response) => {
-        const lastModified = response.headers.get('Last-Modified');
-        label.textContent = formatFranchiseUpdatedText(lastModified);
+        if (!response.ok) throw new Error(`GitHub API request failed: ${response.status}`);
+        return response.json();
+      })
+      .then((commits) => {
+        const latestCommit = Array.isArray(commits) ? commits[0] : null;
+        const timestamp = latestCommit?.commit?.committer?.date || latestCommit?.commit?.author?.date;
+        label.textContent = formatFranchiseUpdatedText(timestamp);
         label.style.display = 'block';
       })
       .catch(() => {
-        label.textContent = 'Last updated: â€”';
+        label.textContent = 'Last updated:';
         label.style.display = 'block';
       });
   }

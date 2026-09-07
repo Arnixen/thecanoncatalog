@@ -75,6 +75,11 @@
       font-size: 1.02rem;
       letter-spacing: 0.01em;
     }
+    .sort-control-row {
+      display: flex;
+      justify-content: center;
+      margin: 4px auto 16px;
+    }
     .franchise-btn[hidden] {
       display: none !important;
     }
@@ -185,6 +190,60 @@
   .toggle-btn input[type="checkbox"] {
     display: none !important;
   }
+  #checkedStateSection {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  #checkedStateSection .checked-state-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 34px;
+    padding: 4px 8px;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 999px;
+    background: rgba(11, 11, 11, 0.96);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+  #checkedStateSection .checked-state-btn {
+    position: relative;
+    min-width: 74px;
+    justify-content: center;
+    margin: 0;
+    padding: 4px 10px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #9a9a9a;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+  #checkedStateSection .checked-state-btn:not(:last-child)::after {
+    content: '/';
+    position: absolute;
+    top: 50%;
+    right: -6px;
+    transform: translateY(-50%);
+    color: #7f7f7f;
+    font-weight: 600;
+    pointer-events: none;
+  }
+  #checkedStateSection .checked-state-btn:hover {
+    background: #1f1f1f;
+    color: #fff;
+  }
+  #checkedStateSection .checked-state-btn.selected {
+    background: #fff;
+    color: #000;
+  }
+  #checkedStateSection .checked-state-btn.selected:hover {
+    color: #000;
+    background: #d0d0d0;
+  }
   #compactToggle {
     padding: 6px 12px;
     border: 1px solid #fff;
@@ -249,12 +308,45 @@
     background: #1f1f1f;
     color: #ffffff;
   }
-  #episodicToggle.active, #sortButton.active {
+  #sortButton {
+    min-width: 260px;
+    padding: 7px 10px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1rem;
+  }
+  #sortButton .toggle-side {
+    min-width: 98px;
+    padding: 6px 12px;
+    border-radius: 6px;
+  }
+  #sortButton .toggle-side:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+  }
+  #sortButton .toggle-side.selected:hover {
+    background: #d0d0d0;
+    color: #000;
+  }
+  #sortButton:hover,
+  #sortButton.active,
+  #sortButton.active:hover {
+    background: transparent;
+    color: #fff;
+  }
+  #episodicToggle.active {
     background: #0b0b0b;
     color: #fff;
   }
-  #episodicToggle.active:hover, #sortButton.active:hover {
+  #episodicToggle.active:hover {
     background: #1f1f1f;
+    color: #fff;
+  }
+  #sortButton.active,
+  #sortButton.active:hover {
+    background: transparent;
     color: #fff;
   }
   #compactToggle.active {

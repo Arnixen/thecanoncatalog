@@ -5,11 +5,11 @@
     const sortButton = document.getElementById('sortButton');
     if (!sortButton) return;
     sortButton.innerHTML = `
-      <span class="toggle-side ${sortMode === 'timeline' ? 'selected' : ''}">Timeline</span>
+      <span class="toggle-side ${sortMode === 'timeline' ? 'selected' : ''}">Timeline Order</span>
       <span class="toggle-separator">/</span>
-      <span class="toggle-side ${sortMode === 'release' ? 'selected' : ''}">Release</span>
+      <span class="toggle-side ${sortMode === 'release' ? 'selected' : ''}">Release Order</span>
     `;
-    sortButton.setAttribute('aria-label', `Sort mode: ${sortMode === 'timeline' ? 'Timeline' : 'Release'}`);
+    sortButton.setAttribute('aria-label', `Sort mode: ${sortMode === 'timeline' ? 'Timeline Order' : 'Release Order'}`);
     sortButton.classList.toggle('active', sortMode === 'release');
   }
 

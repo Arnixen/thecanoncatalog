@@ -35,6 +35,9 @@
       <div id="franchiseLogoFallback" style="display: none; margin: 0 auto 8px auto; font-size: 2rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-shadow: 0 2px 8px #000b;"></div>
       <div id="franchiseUpdatedLabel" class="franchise-updated-label" style="display:block; margin:0 auto 8px auto; color:#fff; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; text-shadow:0 1px 4px rgba(0,0,0,0.55); background:rgba(0,0,0,0.6); padding:4px 10px; border-radius:999px; width:max-content;">Last updated: August 4, 2026</div>
     </div>
+    <div class="sort-control-row">
+      <button id="sortButton">Sort by Release Order</button>
+    </div>
     <h1></h1>
 
 
@@ -58,15 +61,16 @@
     <button id="deselectAll" style="margin-left: 8px;">Deselect All</button>
   </label>
 
-  <button id="sortButton" style="margin-left: 16px;">Sort by Release Order</button>
   <button id="compactToggle" style="margin-left: 8px;">Compact View</button>
   <button id="episodicToggle" style="margin-left: 8px;">Series Mode</button>
   <input id="cardSearch" type="text" placeholder="Search title or episode title" aria-label="Search cards" autocomplete="off" />
   <div id="checkedStateSection" style="margin-top: 12px;">
     Status:
-    <button type="button" class="toggle-btn checked-state-btn selected" data-check-state="all">All</button>
-    <button type="button" class="toggle-btn checked-state-btn" data-check-state="checked">Checked</button>
-    <button type="button" class="toggle-btn checked-state-btn" data-check-state="unchecked">Unchecked</button>
+    <div class="checked-state-toggle" role="group" aria-label="Filter by check status">
+      <button type="button" class="toggle-btn checked-state-btn selected" data-check-state="all">All</button>
+      <button type="button" class="toggle-btn checked-state-btn" data-check-state="checked">Checked</button>
+      <button type="button" class="toggle-btn checked-state-btn" data-check-state="unchecked">Unchecked</button>
+    </div>
     <button type="button" id="checkAllCards" style="margin-left: 8px;">Check All</button>
     <button type="button" id="uncheckAllCards" style="margin-left: 8px;">Uncheck All</button>
   </div>
