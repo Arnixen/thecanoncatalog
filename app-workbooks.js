@@ -125,7 +125,17 @@
           typeContainer.appendChild(sectionsWrapper);
         }
 
-        const types = Array.from(new Set(data.map(row => row.type).filter(Boolean)));
+        // Collect all types, splitting on comma for multi-type entries
+        const typeSet = new Set();
+        data.forEach(row => {
+          const t = row.type;
+          if (t === null || t === undefined || t === '') return;
+          String(t).split(',').forEach(item => {
+            let trimmed = item.trim();
+            if (trimmed) typeSet.add(trimmed);
+          });
+        });
+        const types = Array.from(typeSet);
         if (franchiseKey === 'StarWars') {
           types.sort((a, b) => {
             const bucketDiff = getStarWarsTypeSortBucket(a) - getStarWarsTypeSortBucket(b);
@@ -155,8 +165,6 @@
             icon.loading = 'lazy';
             icon.decoding = 'async';
             icon.addEventListener('error', () => icon.remove());
-            btn.classList.add('has-type-mask');
-            btn.style.setProperty('--type-icon-mask', `url("${iconSrc}")`);
             btn.appendChild(icon);
           }
 
@@ -164,6 +172,11 @@
           label.className = 'type-label';
           label.textContent = type;
           btn.appendChild(label);
+
+          const checkmark = document.createElement('span');
+          checkmark.className = 'type-checkmark';
+          checkmark.textContent = '✓';
+          btn.appendChild(checkmark);
 
           if (franchiseKey === 'StarWars' && isKidsType(type)) {
             kidsTypeContainer.appendChild(btn);
@@ -230,13 +243,25 @@
 
         universes.forEach(u => {
           const btn = document.createElement('label');
-          btn.className = 'toggle-btn selected';
+          btn.className = 'toggle-btn selected universe-filter-btn';
+          btn.title = u;
+          btn.setAttribute('aria-label', u);
           const checkbox = document.createElement('input');
           checkbox.type = 'checkbox';
           checkbox.value = u;
           checkbox.checked = true;
           btn.appendChild(checkbox);
-          btn.appendChild(document.createTextNode(u));
+
+          const label = document.createElement('span');
+          label.className = 'universe-label';
+          label.textContent = u;
+          btn.appendChild(label);
+
+          const checkmark = document.createElement('span');
+          checkmark.className = 'universe-checkmark';
+          checkmark.textContent = '✓';
+          btn.appendChild(checkmark);
+
           universeContainer.appendChild(btn);
         });
 

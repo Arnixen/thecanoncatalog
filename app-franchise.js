@@ -46,8 +46,8 @@
   }
 
   function getTypeIconForType(typeValue) {
-    const key = normalizeTypeKey(typeValue);
-    if (!key) return '';
+    if (!typeValue) return '';
+    const parts = String(typeValue).split(',').map(t => t.trim()).filter(Boolean);
     const icon = (fileName) => `images/${encodeURIComponent(fileName).replace(/%2F/g, '/')}`;
     const directMap = {
       'film': 'Film.png',
@@ -93,22 +93,27 @@
       'video game (spinoff)': 'Video Game.png'
     };
 
-    if (directMap[key]) return icon(directMap[key]);
-    if (key.includes('comic')) return icon('Comic (Marvel).png');
-    if (key.includes('graphic novel')) return icon('Graphic Novel.png');
-    if (key.includes('manga')) return icon('Manga.png');
-    if (key.includes('short story')) return icon('Short Story.png');
-    if (key.includes('audio')) return icon('Audio Drama.png');
-    if (key.includes('junior') && key.includes('book')) return icon('Book (Junior).png');
-    if (key.includes('young adult') && key.includes('novel')) return icon('Novel (Young Adult).png');
-    if (key.includes('middle-grade') && key.includes('novel')) return icon('Novel (Middle Grade).png');
-    if (key.includes('novel')) return icon('Novel.png');
-    if (key.includes('game')) return icon('Video Game.png');
-    if (key.includes('animated')) return icon('TV (Animated).png');
-    if (key.includes('short')) return icon('Short.png');
-    if (key.includes('special')) return icon('Special.png');
-    if (key.includes('series') || key.includes('tv') || key.includes('episode')) return icon('TV (Live Action).png');
-    if (key.includes('film') || key.includes('movie')) return icon('Film.png');
+    for (const part of parts) {
+      const key = normalizeTypeKey(part);
+      if (!key) continue;
+
+      if (directMap[key]) return icon(directMap[key]);
+      if (key.includes('comic')) return icon('Comic (Marvel).png');
+      if (key.includes('graphic novel')) return icon('Graphic Novel.png');
+      if (key.includes('manga')) return icon('Manga.png');
+      if (key.includes('short story')) return icon('Short Story.png');
+      if (key.includes('audio')) return icon('Audio Drama.png');
+      if (key.includes('junior') && key.includes('book')) return icon('Book (Junior).png');
+      if (key.includes('young adult') && key.includes('novel')) return icon('Novel (Young Adult).png');
+      if (key.includes('middle-grade') && key.includes('novel')) return icon('Novel (Middle Grade).png');
+      if (key.includes('novel')) return icon('Novel.png');
+      if (key.includes('game')) return icon('Video Game.png');
+      if (key.includes('animated')) return icon('TV (Animated).png');
+      if (key.includes('short')) return icon('Short.png');
+      if (key.includes('special')) return icon('Special.png');
+      if (key.includes('series') || key.includes('tv') || key.includes('episode')) return icon('TV (Live Action).png');
+      if (key.includes('film') || key.includes('movie')) return icon('Film.png');
+    }
 
     return '';
   }
@@ -128,6 +133,38 @@
         btn.classList.remove('selected');
       }
     });
+  }
+
+  function updateTypeDropdownLabel() {
+    const total = document.querySelectorAll('#typeCheckboxes input[type="checkbox"]').length;
+    const checked = document.querySelectorAll('#typeCheckboxes input[type="checkbox"]:checked').length;
+    const labelEl = document.getElementById('typeDropdownLabel');
+    if (!labelEl) return;
+    if (total === 0) {
+      labelEl.textContent = 'Types';
+    } else if (checked === total) {
+      labelEl.textContent = 'Types (All)';
+    } else if (checked === 0) {
+      labelEl.textContent = 'Types (None)';
+    } else {
+      labelEl.textContent = `Types (${checked}/${total})`;
+    }
+  }
+
+  function updateUniverseDropdownLabel() {
+    const total = document.querySelectorAll('#universeCheckboxes input[type="checkbox"]').length;
+    const checked = document.querySelectorAll('#universeCheckboxes input[type="checkbox"]:checked').length;
+    const labelEl = document.getElementById('universeDropdownLabel');
+    if (!labelEl) return;
+    if (total === 0) {
+      labelEl.textContent = 'Universes';
+    } else if (checked === total) {
+      labelEl.textContent = 'Universes (All)';
+    } else if (checked === 0) {
+      labelEl.textContent = 'Universes (None)';
+    } else {
+      labelEl.textContent = `Universes (${checked}/${total})`;
+    }
   }
 
   function persistFilterState(franchiseKey) {
@@ -168,7 +205,13 @@
 
       let hidden = false;
 
-      if (selectedTypes.length === 0 || !selectedTypes.includes(cardType)) hidden = true;
+      if (selectedTypes.length === 0) hidden = true;
+      else {
+        // Support multiple types per entry (comma-separated)
+        let types = cardType ? cardType.split(',').map(t => t.trim()).filter(Boolean) : [];
+        // If none of the types are selected, hide
+        if (!types.some(t => selectedTypes.includes(t))) hidden = true;
+      }
       if (currentFranchise !== 'StarWars') {
         if (selectedUniverses.length === 0) hidden = true;
         else {
@@ -205,6 +248,10 @@
     }
     // Update runtime counter
     updateRuntimeCounter();
+    // Update type dropdown summary label
+    updateTypeDropdownLabel();
+    // Update universe dropdown summary label
+    updateUniverseDropdownLabel();
     // Instantly update arrow visibility after filtering
     updateArrowVisibility();
     // Persist current filter state so refresh restores the same view

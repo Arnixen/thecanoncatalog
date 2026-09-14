@@ -44,22 +44,33 @@
 
 
 <div class="filters">
-  Types:
-  <br>
-  <div id="typeCheckboxes" style="display:inline-block;"></div>
-  <br>
-  <button id="selectAllTypes" style="margin-left: 8px;">Select All</button>
-  <button id="deselectAllTypes" style="margin-left: 8px;">Deselect All</button>
+  <div class="type-dropdown-container" id="typeDropdownContainer">
+    <button type="button" class="type-dropdown-btn" id="typeDropdownBtn" aria-haspopup="true" aria-expanded="false">
+      <span id="typeDropdownLabel">Types</span>
+      <span class="dropdown-arrow">▼</span>
+    </button>
+    <div class="type-dropdown-menu" id="typeDropdownMenu">
+      <div class="type-dropdown-actions">
+        <button type="button" id="selectAllTypes">Select All</button>
+        <button type="button" id="deselectAllTypes">Deselect All</button>
+      </div>
+      <div id="typeCheckboxes"></div>
+    </div>
+  </div>
 
-  <label id="universeSection" style="margin-left: 16px;">
-    <br>
-    Universes:
-    <br>
-    <div id="universeCheckboxes"></div>
-    <br>
-    <button id="selectAll" style="margin-left: 8px;">Select All</button>
-    <button id="deselectAll" style="margin-left: 8px;">Deselect All</button>
-  </label>
+  <div class="universe-dropdown-container" id="universeSection" style="margin-left: 8px;">
+    <button type="button" class="universe-dropdown-btn" id="universeDropdownBtn" aria-haspopup="true" aria-expanded="false">
+      <span id="universeDropdownLabel">Universes</span>
+      <span class="dropdown-arrow">▼</span>
+    </button>
+    <div class="universe-dropdown-menu" id="universeDropdownMenu">
+      <div class="universe-dropdown-actions">
+        <button type="button" id="selectAll">Select All</button>
+        <button type="button" id="deselectAll">Deselect All</button>
+      </div>
+      <div id="universeCheckboxes"></div>
+    </div>
+  </div>
 
   <button id="compactToggle" style="margin-left: 8px;">Compact View</button>
   <button id="episodicToggle" style="margin-left: 8px;">Series Mode</button>
@@ -101,6 +112,8 @@
   <span>Comic covers are sourced from <a href="https://comicvine.gamespot.com" target="_blank" rel="noopener noreferrer">Comic Vine</a>.</span>
   <img src="images/OpenLibraryLogo.png" alt="Open Library" />
   <span>Book covers are sourced from <a href="https://openlibrary.org" target="_blank" rel="noopener noreferrer">Open Library</a>.</span>
+  <img src="images/IGDB-logo.png" alt="IGDB" />
+  <span>Video game covers are sourced from <a href="https://www.igdb.com" target="_blank" rel="noopener noreferrer">IGDB</a>.</span>
 </div>
 
   <script src="app-core.js"></script>

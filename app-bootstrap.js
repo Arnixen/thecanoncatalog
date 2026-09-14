@@ -1,6 +1,54 @@
 ﻿  document.addEventListener('DOMContentLoaded', () => {
     cleanupLegacyCheckedCardStateOnce();
 
+    // Type Dropdown toggle
+    const typeDropdownBtn = document.getElementById('typeDropdownBtn');
+    const typeDropdownContainer = document.getElementById('typeDropdownContainer');
+    if (typeDropdownBtn && typeDropdownContainer) {
+      typeDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = typeDropdownContainer.classList.contains('open');
+        typeDropdownContainer.classList.toggle('open', !isOpen);
+        typeDropdownBtn.setAttribute('aria-expanded', String(!isOpen));
+      });
+      document.addEventListener('click', (e) => {
+        if (!typeDropdownContainer.contains(e.target)) {
+          typeDropdownContainer.classList.remove('open');
+          typeDropdownBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && typeDropdownContainer.classList.contains('open')) {
+          typeDropdownContainer.classList.remove('open');
+          typeDropdownBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    // Universe Dropdown toggle
+    const universeDropdownBtn = document.getElementById('universeDropdownBtn');
+    const universeDropdownContainer = document.getElementById('universeSection');
+    if (universeDropdownBtn && universeDropdownContainer) {
+      universeDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = universeDropdownContainer.classList.contains('open');
+        universeDropdownContainer.classList.toggle('open', !isOpen);
+        universeDropdownBtn.setAttribute('aria-expanded', String(!isOpen));
+      });
+      document.addEventListener('click', (e) => {
+        if (!universeDropdownContainer.contains(e.target)) {
+          universeDropdownContainer.classList.remove('open');
+          universeDropdownBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && universeDropdownContainer.classList.contains('open')) {
+          universeDropdownContainer.classList.remove('open');
+          universeDropdownBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
     // Type Select All/Deselect All
     document.getElementById('selectAllTypes').addEventListener('click', () => {
       document.querySelectorAll('#typeCheckboxes input[type="checkbox"]').forEach(cb => {
