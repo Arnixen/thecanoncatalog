@@ -1,4 +1,4 @@
-Welcome to The Canon Catalog!
+Welcome to The Canon Catalog! Visit the website at https://arnixen.github.io/thecanoncatalog/
 
 Nerds, Freaks, and Geeks Rejoice! 
 I have spent a summer converting what was previously a 4-year-in-progress collection of google sheets into a living, breathing, (GitHub Pages) website! (Official Page coming... Eventually, Maybe?)
