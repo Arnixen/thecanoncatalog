@@ -3,6 +3,15 @@
     const file = franchiseFiles[franchiseKey];
     const sheetName = isStarWars ? franchiseWorksheetNames.StarWars[currentStarWarsContinuity] : null;
 
+    const pokemonFilterMigrationKey = 'pokemonEmptyFilterRecovery-v1';
+    if (franchiseKey === 'Pokemon' && !localStorage.getItem(pokemonFilterMigrationKey)) {
+      if (localStorage.getItem('typeFilters-Pokemon') === '[]' && localStorage.getItem('universeFilters-Pokemon') === '[]') {
+        localStorage.removeItem('typeFilters-Pokemon');
+        localStorage.removeItem('universeFilters-Pokemon');
+      }
+      localStorage.setItem(pokemonFilterMigrationKey, 'done');
+    }
+
     restoreSearchForFranchise(franchiseKey);
 
     // Show/hide era section
@@ -187,10 +196,15 @@
         // Restore type filter state from localStorage
         const typeFilterKey = `typeFilters-${franchiseKey}`;
         const savedTypeFilters = JSON.parse(localStorage.getItem(typeFilterKey) || 'null');
-        if (savedTypeFilters) {
+        if (Array.isArray(savedTypeFilters)) {
+          const hasMatchingType = savedTypeFilters.some(type => types.includes(type));
+          const restoredTypeFilters = savedTypeFilters.length > 0 && !hasMatchingType ? types : savedTypeFilters;
           document.querySelectorAll('#typeCheckboxes input[type="checkbox"]').forEach(cb => {
-            cb.checked = savedTypeFilters.includes(cb.value);
+            cb.checked = restoredTypeFilters.includes(cb.value);
           });
+          if (restoredTypeFilters !== savedTypeFilters) {
+            localStorage.setItem(typeFilterKey, JSON.stringify(restoredTypeFilters));
+          }
         } else if (franchiseKey === 'StarWars') {
           document.querySelectorAll('#typeCheckboxes input[type="checkbox"]').forEach(cb => {
             if (isKidsType(cb.value)) cb.checked = false;
@@ -268,10 +282,15 @@
         // Restore universe filter state from localStorage
         const universeFilterKey = `universeFilters-${franchiseKey}`;
         const savedUniverseFilters = JSON.parse(localStorage.getItem(universeFilterKey) || 'null');
-        if (savedUniverseFilters) {
+        if (Array.isArray(savedUniverseFilters)) {
+          const hasMatchingUniverse = savedUniverseFilters.some(universe => universes.includes(universe));
+          const restoredUniverseFilters = savedUniverseFilters.length > 0 && !hasMatchingUniverse ? universes : savedUniverseFilters;
           document.querySelectorAll('#universeCheckboxes input[type="checkbox"]').forEach(cb => {
-            cb.checked = savedUniverseFilters.includes(cb.value);
+            cb.checked = restoredUniverseFilters.includes(cb.value);
           });
+          if (restoredUniverseFilters !== savedUniverseFilters) {
+            localStorage.setItem(universeFilterKey, JSON.stringify(restoredUniverseFilters));
+          }
         }
         // Add event listeners for universe checkboxes
         document.querySelectorAll('#universeCheckboxes .toggle-btn').forEach(btn => {
