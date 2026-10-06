@@ -6,7 +6,8 @@
     MiddleEarth: 'MIDDLEEARTH.xlsx',
     RiordanVerse: 'RIORDANVERSE.xlsx',
     DCU: 'DCU.xlsx',
-    Zelda: 'ZELDA.xlsx'
+    Zelda: 'ZELDA.xlsx',
+    Pokemon: 'POKEMON.xlsx'
   };
   window.franchiseWorksheetNames = {
     StarWars: { Canon: 'CANON', Legends: 'LEGENDS' }

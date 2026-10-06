@@ -69,6 +69,9 @@
       label: 'The Legend of Zelda',
       logo: 'tloz-logo.png',
       scale: 1.4
+    },
+    Pokemon: {
+      label: 'Pokémon'
     }
   };
 
