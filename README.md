@@ -1,4 +1,4 @@
-Welcome to The Canon Catalog!
+Welcome to The Canon Catalog! Visit the website at https://arnixen.github.io/thecanoncatalog/
 
 Nerds, Freaks, and Geeks Rejoice! 
 I have spent a summer converting what was previously a 4-year-in-progress collection of google sheets into a living, breathing, (GitHub Pages) website! (Official Page coming... Eventually, Maybe?)
@@ -31,7 +31,7 @@ I really hope you enjoy! Any feedback can be sent to arnixen7567@gmail.com
 Movie & TV Posters are sourced from The Movie Database.
 Comic & Graphic Novel Covers are sourced from Comic Vine.
 Novel Covers are sourced from Open Library when available.
-Video Game Key Art has yet to be sourced.
+Video Game Covers/Key Art are sourced from IGDB.
 
 All posters, logos, and artworks belong to their respective copyright holders.
 This site is not endorsed by or affiliated with Disney, Warner Brothers, The BBC, Paramount Pictures, or Nintendo.
