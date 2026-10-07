@@ -7,12 +7,12 @@ The Canon Catalog site transforms my workbooks full of franchise data into a bea
 Available Franchise timelines are currently:
 - Marvel
 - Star Wars
-- Doctor Who (No, I'm not insane, this is purely for intended watch order. I am not doing an in-universe chronology)
 - Star Trek
 - DC
 - Middle Earth
 - The World of Percy Jackson
 - The Legend of Zelda
+- Pokémon Anime
 
 All timelines are complete to my level of willingness, and I have ommitted items simply because they don't fit my preferences. (Subject to change) (PJO Movies, Howard the Duck, etc.)
 
